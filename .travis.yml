@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t simonnewell/docker-react -f Dockerfile.dev .
+
+script:
+  # Course doc mentions the change needed from original course material.
+  # if get rakefile not found. Put: language: generic at the top of this file.
+  #- docker run simonnewell/docker-react npm run test -- --coverage
+  - docker run -e CI=true simonnewell/docker-react npm run test
+
